@@ -96,6 +96,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
+  console.log('Notification clicked:', event);
+
   event.notification.close();
 
   // Add your custom logic here when the notification is clicked

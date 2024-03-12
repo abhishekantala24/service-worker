@@ -23,7 +23,7 @@ function App() {
       };
   
       navigator.serviceWorker.ready.then((registration) => {
-        registration.showNotification('Your App Name', notificationOptions);
+        registration.showNotification('my-app', notificationOptions);
       });
     } else {
       console.warn('Notification permission not granted or service worker not supported.');

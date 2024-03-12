@@ -6,6 +6,14 @@ function App() {
 
   const [notificationPermission, setNotificationPermission] = useState(Notification.permission);
 
+  function generateOTP() {
+    const otpLength = 6;
+    const randomOTP = Math.floor(Math.pow(10, otpLength - 1) + Math.random() * 9 * Math.pow(10, otpLength - 1));
+    return randomOTP.toString();
+  }
+  
+  const otp = generateOTP();
+
   const requestNotificationPermission = async () => {
     try {
       const permission = await Notification.requestPermission();
@@ -18,8 +26,8 @@ function App() {
   const triggerPushNotification = () => {
     if (notificationPermission === 'granted' && 'serviceWorker' in navigator) {
       const notificationOptions = {
-        body: 'This is your notification body.',
-        icon: 'https://www.vkf-renzel.com/out/pictures/generated/product/1/356_356_75/r12044336-01/general-warning-sign-10836-1.jpg?%20%20%20%20auto=compress&cs=tinysrgb&dpr=1&w=500',
+        body: `Hello, Your otp is ${otp}`,
+        icon: 'https://static.vecteezy.com/system/resources/previews/023/128/305/non_2x/otp-one-time-password-login-code-verification-concept-icon-in-line-style-design-isolated-on-white-background-editable-stroke-vector.jpg',
       };
   
       navigator.serviceWorker.ready.then((registration) => {
@@ -30,8 +38,6 @@ function App() {
       console.warn('Notification permission not granted or service worker not supported.');
     }
   };
-  
-
 
   return (
     <div className="App">

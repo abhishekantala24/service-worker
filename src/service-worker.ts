@@ -69,7 +69,7 @@ registerRoute(
     ],
   })
 );
-
+const CACHE_NAME = `$my-app-cache-v-${process.env.REACT_APP_VERSION}`
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
@@ -81,7 +81,7 @@ self.addEventListener('message', (event) => {
 // Any other custom service worker logic can go here.
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open('your-cache-name').then((cache) => {
+    caches.open(CACHE_NAME).then((cache) => {
       // Cache your assets here if needed
     })
   );
@@ -93,4 +93,11 @@ self.addEventListener('activate', (event) => {
     // Add logic to clear old caches if necessary
     self.clients.claim() // Ensure the new service worker takes control of clients immediately
   );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  // Add your custom logic here when the notification is clicked
+  // For example, you can open a specific URL or perform any desired action
 });

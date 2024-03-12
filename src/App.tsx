@@ -27,12 +27,12 @@ function App() {
     if (notificationPermission === 'granted' && 'serviceWorker' in navigator) {
       const notificationOptions = {
         body: `Hello, Your otp is ${otp}`,
-        icon: 'https://static.vecteezy.com/system/resources/previews/023/128/305/non_2x/otp-one-time-password-login-code-verification-concept-icon-in-line-style-design-isolated-on-white-background-editable-stroke-vector.jpg',
+        icon: 'https://media.licdn.com/dms/image/D4D0BAQG1eDwazzEaLw/company-logo_200_200/0/1706508386782/spiral_technolabs_pvt_ltd_logo?e=2147483647&v=beta&t=uQOPtKtkOhGFP58H4w7-uVJLlbjawFzhWVF84ec4ieY',
       };
   
       navigator.serviceWorker.ready.then((registration) => {
         console.log(notificationOptions); 
-        return registration.showNotification('my-app', notificationOptions);
+        return registration.showNotification('Spiral Technolabs', notificationOptions);
       });
     } else {
       console.warn('Notification permission not granted or service worker not supported.');

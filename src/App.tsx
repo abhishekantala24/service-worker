@@ -19,7 +19,7 @@ function App() {
     if (notificationPermission === 'granted' && 'serviceWorker' in navigator) {
       const notificationOptions = {
         body: 'This is your notification body.',
-        icon: 'path/to/your/notification-icon.png',
+        icon: './logo.svg',
       };
   
       navigator.serviceWorker.ready.then((registration) => {

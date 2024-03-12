@@ -78,3 +78,18 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open('your-cache-name').then((cache) => {
+      // Cache your assets here if needed
+    })
+  );
+  self.skipWaiting(); // Ensure the new service worker becomes active immediately
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    // Add logic to clear old caches if necessary
+    self.clients.claim() // Ensure the new service worker takes control of clients immediately
+  );
+});

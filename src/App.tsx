@@ -19,12 +19,12 @@ function App() {
     if (notificationPermission === 'granted' && 'serviceWorker' in navigator) {
       const notificationOptions = {
         body: 'This is your notification body.',
-        icon: './logo.svg',
+        icon: 'https://www.vkf-renzel.com/out/pictures/generated/product/1/356_356_75/r12044336-01/general-warning-sign-10836-1.jpg?%20%20%20%20auto=compress&cs=tinysrgb&dpr=1&w=500',
       };
   
       navigator.serviceWorker.ready.then((registration) => {
         console.log(notificationOptions);
-        
+          new Notification('Hello World', notificationOptions);
         return registration.showNotification('my-app', notificationOptions);
       });
     } else {

@@ -1,0 +1,46 @@
+.sections {
+  flex: 4;
+  padding: 12px 9px 12px 6px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  section {
+    padding: 20px;
+    color: $text-color;
+    background-color: $section-bg-color;
+    max-width: 1920px;
+    box-shadow: 6px 6px 3px darken($color: $section-bg-color, $amount: 20);
+
+    p {
+      text-align: left;
+      margin: 8px 0px 0px 0px;
+    }
+
+    ul {
+      list-style-type: disc;
+      list-style-position: inside;
+
+      li {
+        padding-left: 16px;
+      }
+    }
+
+    a {
+      color: $tertiary;
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* Large smartphones */
+@media screen and (max-width: 768px) {
+  .sections {
+    padding: 6px 6px 6px 6px;
+  }
+}

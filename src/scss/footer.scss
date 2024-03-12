@@ -1,0 +1,42 @@
+footer {
+  padding: 5px;
+  text-align: left;
+  color: $section-bg-color;
+  background-color: $header-bg-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 34px;
+
+  a {
+    color: $section-bg-color;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      text-decoration: underline;
+      color: $header-text-color;
+      
+    }
+  }
+
+  .socialMedia {
+    justify-content: flex-end;
+
+    img {
+      -webkit-filter: invert(80%);
+      /* safari 6.0 - 9.0 */
+      filter: invert(80%);
+      height: 24px;
+      padding-left: 40px;
+      padding-left: 40px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        -webkit-filter: invert(100%);
+        /* safari 6.0 - 9.0 */
+        filter: invert(100%);
+      }
+    }
+  }
+}

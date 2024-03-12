@@ -1,0 +1,18 @@
+aside {
+  flex: 1;
+  color: $text-color;
+  text-align: center;
+  padding: 12px 6px 12px 9px;
+
+  img {
+    border-radius: $border-radius;
+    box-shadow: 6px 6px 3px darken($color: $section-bg-color, $amount: 20);
+  }
+}
+
+/* Large smartphones */
+@media screen and (max-width: 768px) {
+  aside {
+    padding: 12px 9px 6px 9px;
+  }
+}

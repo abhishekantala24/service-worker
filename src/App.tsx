@@ -23,8 +23,7 @@ function App() {
       };
   
       navigator.serviceWorker.ready.then((registration) => {
-        console.log(notificationOptions);
-          new Notification('Hello World', notificationOptions);
+        console.log(notificationOptions); 
         return registration.showNotification('my-app', notificationOptions);
       });
     } else {

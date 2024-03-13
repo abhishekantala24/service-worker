@@ -11,8 +11,7 @@ function App() {
     const randomOTP = Math.floor(Math.pow(10, otpLength - 1) + Math.random() * 9 * Math.pow(10, otpLength - 1));
     return randomOTP.toString();
   }
-  
-  const otp = generateOTP();
+
 
   const requestNotificationPermission = async () => {
     try {
@@ -24,14 +23,15 @@ function App() {
   };
 
   const triggerPushNotification = () => {
+    const otp = generateOTP();
     if (notificationPermission === 'granted' && 'serviceWorker' in navigator) {
       const notificationOptions = {
         body: `Hello, Your otp is ${otp}`,
         icon: 'https://media.licdn.com/dms/image/D4D0BAQG1eDwazzEaLw/company-logo_200_200/0/1706508386782/spiral_technolabs_pvt_ltd_logo?e=2147483647&v=beta&t=uQOPtKtkOhGFP58H4w7-uVJLlbjawFzhWVF84ec4ieY',
       };
-  
+
       navigator.serviceWorker.ready.then((registration) => {
-        console.log(notificationOptions); 
+        console.log(notificationOptions);
         return registration.showNotification('Spiral Technolabs', notificationOptions);
       });
     } else {

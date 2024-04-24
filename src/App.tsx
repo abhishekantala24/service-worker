@@ -6,11 +6,11 @@ import { useServiceWorker } from './useServiceWorker';
 function App() {
   const { waitingWorker, showReload, reloadPage } = useServiceWorker();
 
-  const showToast = (toastOptions : any) => {
+  const showToast = () => {
     // Implementation to display a toast notification
     // For example, you can use a library like react-toastify
     // Here's a basic implementation using console.log:
-    console.log('Showing toast:', toastOptions.description);
+    console.log('Showing toast:');
   };
 
   const closeToast = () => {
@@ -22,14 +22,7 @@ function App() {
 
   useEffect(() => {
     if (showReload && waitingWorker) {
-      showToast({
-        description: (
-          <div>
-            A new version of this page is available
-            <button onClick={() => reloadPage()}>REFRESH</button>
-          </div>
-        ),
-      });
+      showToast();
     } else closeToast();
   }, [waitingWorker, showReload, reloadPage]);
 

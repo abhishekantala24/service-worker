@@ -1,54 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useServiceWorker } from './useServiceWorker';
 
 function App() {
+  const { waitingWorker, showReload, reloadPage } = useServiceWorker();
 
-  const [notificationPermission, setNotificationPermission] = useState(Notification.permission);
-
-  function generateOTP() {
-    const otpLength = 6;
-    const randomOTP = Math.floor(Math.pow(10, otpLength - 1) + Math.random() * 9 * Math.pow(10, otpLength - 1));
-    return randomOTP.toString();
-  }
-
-
-  const requestNotificationPermission = async () => {
-    try {
-      const permission = await Notification.requestPermission();
-      setNotificationPermission(permission);
-    } catch (error) {
-      console.error('Error requesting notification permission:', error);
-    }
+  const showToast = (toastOptions : any) => {
+    // Implementation to display a toast notification
+    // For example, you can use a library like react-toastify
+    // Here's a basic implementation using console.log:
+    console.log('Showing toast:', toastOptions.description);
   };
 
-  const triggerPushNotification = () => {
-    const otp = generateOTP();
-    if (notificationPermission === 'granted' && 'serviceWorker' in navigator) {
-      const notificationOptions = {
-        body: `Hello, Your otp is ${otp}`,
-        icon: 'https://media.licdn.com/dms/image/D4D0BAQG1eDwazzEaLw/company-logo_200_200/0/1706508386782/spiral_technolabs_pvt_ltd_logo?e=2147483647&v=beta&t=uQOPtKtkOhGFP58H4w7-uVJLlbjawFzhWVF84ec4ieY',
-      };
+  const closeToast = () => {
+    // Implementation to close or dismiss the toast notification
+    // For example, if you're using a library, call the close method
+    // Here's a basic implementation:
+    console.log('Closing toast');
+  };
 
-      navigator.serviceWorker.ready.then((registration) => {
-        console.log(notificationOptions);
-        return registration.showNotification('Spiral Technolabs', notificationOptions);
+  useEffect(() => {
+    if (showReload && waitingWorker) {
+      showToast({
+        description: (
+          <div>
+            A new version of this page is available
+            <button onClick={() => reloadPage()}>REFRESH</button>
+          </div>
+        ),
       });
-    } else {
-      console.warn('Notification permission not granted or service worker not supported.');
-    }
-  };
+    } else closeToast();
+  }, [waitingWorker, showReload, reloadPage]);
+
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={requestNotificationPermission} disabled={notificationPermission === 'granted'}>
-          Request Notification Permission
-        </button>
-        <button onClick={triggerPushNotification}>Trigger Push Notification</button>
         <p>
-          Test By abhi
+          Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
           className="App-link"

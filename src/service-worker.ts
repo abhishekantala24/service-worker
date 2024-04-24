@@ -27,8 +27,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 // Set up App Shell-style routing, so that all navigation requests
 // are fulfilled with your index.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
-const fileExtensionRegexp = new RegExp('/[^/?]+\\.(ico|js|css|png|jpg|jpeg|gif|svg|webp)$');
-
+const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
 registerRoute(
   // Return false to exempt requests from being fulfilled by index.html.
   ({ request, url }: { request: Request; url: URL }) => {
@@ -69,7 +68,7 @@ registerRoute(
     ],
   })
 );
-const CACHE_NAME = `$my-app-cache-v-${process.env.REACT_APP_VERSION}`
+
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
@@ -79,27 +78,11 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      // Cache your assets here if needed
-    })
-  );
-  self.skipWaiting(); // Ensure the new service worker becomes active immediately
-});
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    // Add logic to clear old caches if necessary
-    self.clients.claim() // Ensure the new service worker takes control of clients immediately
-  );
-});
-
-self.addEventListener('notificationclick', (event) => {
-  console.log('Notification clicked:', event);
-
-  event.notification.close();
-
-  // Add your custom logic here when the notification is clicked
-  // For example, you can open a specific URL or perform any desired action
+// This allows the web app to trigger skipWaiting via
+// registration.waiting.postMessage({type: 'SKIP_WAITING'})
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });

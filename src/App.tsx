@@ -26,6 +26,8 @@ function App() {
       const confirmReload = window.confirm("A new version of this page is available. Click OK to refresh.");
 
     if (confirmReload) {
+      console.log("first call");
+      
       reloadPage();
     }
 
@@ -38,7 +40,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-         Test case 2
+         Test case 3
         </p>
         <a
           className="App-link"

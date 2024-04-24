@@ -14,6 +14,7 @@ export const useServiceWorker = () => {
   // simply put, this tells the service
   // worker to skip the waiting phase and then reloads the page
   const reloadPage = useCallback(() => {
+    console.log("updating all ")
     waitingWorker?.postMessage({ type: "SKIP_WAITING" });
     setShowReload(false);
     window.location.reload();

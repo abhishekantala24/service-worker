@@ -11,6 +11,7 @@ function App() {
     // For example, you can use a library like react-toastify
     // Here's a basic implementation using console.log:
     console.log('Showing toast:');
+    alert("New content availanle")
   };
 
   const closeToast = () => {
@@ -32,7 +33,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+         Test case 1 
         </p>
         <a
           className="App-link"

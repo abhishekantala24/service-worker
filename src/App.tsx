@@ -23,7 +23,12 @@ function App() {
 
   useEffect(() => {
     if (showReload && waitingWorker) {
-      showToast();
+      const confirmReload = window.confirm("A new version of this page is available. Click OK to refresh.");
+
+    if (confirmReload) {
+      reloadPage();
+    }
+
     } else closeToast();
   }, [waitingWorker, showReload, reloadPage]);
 
